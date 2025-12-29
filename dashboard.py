@@ -48,7 +48,7 @@ def fetch_data(owner, repo):
     
     data = response.json()
     if not data:
-        return None, "Repo is empty."
+        return None, "Repository is empty."
         
     # Parse
     commit_list = []
