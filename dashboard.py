@@ -158,7 +158,7 @@ if btn_scan:
                     values = list(data_slice.values)
 
                 # Plotting Horizontal Bars
-                bars = ax1.barh(labels, values, color="#4CAF50") # Google Green color
+                bars = ax1.bar(labels, values, color="#4CAF50") # Google Green color
                 
                 # Formatting
                 ax1.set_title(f"Commit Leaderboard ({view_mode})")
