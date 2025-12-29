@@ -140,40 +140,44 @@ if btn_scan:
             # Create two separate columns in Streamlit
             col_viz1, col_viz2 = st.columns(2)
 
-            # --- LEFT COLUMN: PIE CHART ---
+           # --- LEFT COLUMN: BAR CHART (LEADERBOARD) ---
             with col_viz1:
-                fig1, ax1 = plt.subplots(figsize=(6, 5))
+                fig1, ax1 = plt.subplots(figsize=(6, 6))
                 
-                # LOGIC: Check which button the user selected
+                # Data Prep
                 if view_mode == "Top 5 (Clean)":
-                    # --- OPTION A: TOP 5 LOGIC (Existing) ---
                     data_slice = author_counts.head(5)
-                    others_count = author_counts.iloc[5:].sum()
-                    
+                    # We reverse it so the #1 author is at the TOP of the chart
+                    data_slice = data_slice.iloc[::-1]
                     labels = list(data_slice.index)
-                    sizes = list(data_slice.values)
-                    
-                    if others_count > 0:
-                        labels.append("Others")
-                        sizes.append(others_count)
-                        
+                    values = list(data_slice.values)
                 else:
-                    # --- OPTION B: SHOW ALL LOGIC (New) ---
-                    # No grouping, just grab everyone
-                    labels = list(author_counts.index)
-                    sizes = list(author_counts.values)
+                    # Show All (Reversed)
+                    data_slice = author_counts.iloc[::-1]
+                    labels = list(data_slice.index)
+                    values = list(data_slice.values)
 
-                # Plotting (Works for both options)
-                wedges, texts, autotexts = ax1.pie(
-                    sizes, 
-                    autopct='%1.1f%%', 
-                    startangle=140, 
-                    textprops=dict(color="white")
-                )
-                ax1.set_title(f"Code Ownership ({view_mode})")
+                # Plotting Horizontal Bars
+                bars = ax1.barh(labels, values, color="#4CAF50") # Google Green color
                 
-                # Legend (Adjusted to handle many names if needed)
-                ax1.legend(wedges, labels, title="Developers", loc="center left", bbox_to_anchor=(1, 0, 0.5, 1))
+                # Formatting
+                ax1.set_title(f"Commit Leaderboard ({view_mode})")
+                ax1.set_xlabel("Number of Commits")
+                
+                # Add the numbers inside the bars (Data Labels)
+                for bar in bars:
+                    width = bar.get_width()
+                    ax1.text(
+                        width + 0.5,       # x position (just outside bar)
+                        bar.get_y() + bar.get_height()/2, # y position (center)
+                        f'{int(width)}',   # The label (e.g., "85")
+                        va='center', 
+                        fontweight='bold'
+                    )
+                
+                # Remove ugly borders
+                ax1.spines['top'].set_visible(False)
+                ax1.spines['right'].set_visible(False)
                 
                 st.pyplot(fig1)
 
