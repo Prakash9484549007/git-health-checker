@@ -142,7 +142,7 @@ if btn_scan:
 
             # --- LEFT COLUMN: PIE CHART ---
             with col_viz1:
-                fig1, ax1 = plt.subplots(figsize=(6, 6))
+                fig1, ax1 = plt.subplots(figsize=(6, 5))
                 
                 # LOGIC: Check which button the user selected
                 if view_mode == "Top 5 (Clean)":
