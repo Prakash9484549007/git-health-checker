@@ -27,13 +27,13 @@ st.set_page_config(page_title="GitHub Health Check", page_icon="🏥", layout="w
 st.sidebar.title("🔍 Configuration")
 st.sidebar.write("Enter the repository details below:")
 
-owner_name = st.sidebar.text_input("Repo Owner", value="fastapi")
-repo_name = st.sidebar.text_input("Repo Name", value="fastapi")
+owner_name = st.sidebar.text_input("Repo Owner", placeholder="Repo Owner")
+repo_name = st.sidebar.text_input("Repo Name", placeholder="Repo Name")
 searched_dev = st.sidebar.text_input("Compare Developer (Optional)", value="")
 
 # <--- NEW ADDITION STARTS HERE --->
 st.sidebar.divider()
-view_mode = st.sidebar.radio("Chart View Mode:", ["Top 5 (Clean)", "Show All (Detailed)"])
+view_mode = st.sidebar.radio("Chart View Mode:", ["Top 5 Developers", "Show All (Detailed)"])
 # <--- NEW ADDITION ENDS HERE --->
 
 btn_scan = st.sidebar.button("Run Health Check")
