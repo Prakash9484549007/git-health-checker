@@ -178,7 +178,7 @@ if btn_scan:
                 # Remove ugly borders
                 ax1.spines['top'].set_visible(False)
                 ax1.spines['right'].set_visible(False)
-                
+                fig1.tight_layout()
                 st.pyplot(fig1)
 
             # --- RIGHT COLUMN: HEATMAP ---
