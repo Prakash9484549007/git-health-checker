@@ -148,12 +148,12 @@ if btn_scan:
                 if view_mode == "Top 5 (Clean)":
                     data_slice = author_counts.head(5)
                     # We reverse it so the #1 author is at the TOP of the chart
-                    data_slice = data_slice.iloc[::-1]
+                    data_slice = data_slice.iloc
                     labels = list(data_slice.index)
                     values = list(data_slice.values)
                 else:
                     # Show All (Reversed)
-                    data_slice = author_counts.iloc[::-1]
+                    data_slice = author_counts
                     labels = list(data_slice.index)
                     values = list(data_slice.values)
 
@@ -166,12 +166,12 @@ if btn_scan:
                 
                 # Add the numbers inside the bars (Data Labels)
                 for bar in bars:
-                    width = bar.get_width()
+                    height = bar.get_height()
                     ax1.text(
-                        width + 0.5,       # x position (just outside bar)
-                        bar.get_y() + bar.get_height()/2, # y position (center)
-                        f'{int(width)}',   # The label (e.g., "85")
-                        va='center', 
+                        bar.get_x() + bar.get_width()/2, # X center of bar
+                        height,                          # Y (top of bar)
+                        f'{int(height)}',                # The Label
+                        ha='center', va='bottom',        # Alignment
                         fontweight='bold'
                     )
                 
