@@ -142,7 +142,7 @@ if btn_scan:
 
            # --- LEFT COLUMN: BAR CHART (LEADERBOARD) ---
             with col_viz1:
-                fig1, ax1 = plt.subplots(figsize=(6, 6))
+                fig1, ax1 = plt.subplots(figsize=(6, 8))
                 
                 # Data Prep
                 if view_mode == "Top 5 (Clean)":
@@ -163,6 +163,11 @@ if btn_scan:
                 # Formatting
                 ax1.set_title(f"Commit Leaderboard ({view_mode})")
                 ax1.set_xlabel("Number of Commits")
+
+                # --- THE FIX: Rotate 90 degrees ---
+                ax1.set_xticks(range(len(labels)))
+                # rotation=90 makes them vertical. ha='center' aligns them perfectly under the tick marks.
+                ax1.set_xticklabels(labels, rotation=90, ha='center', fontsize=9)
                 
                 # Add the numbers inside the bars (Data Labels)
                 for bar in bars:
@@ -172,7 +177,7 @@ if btn_scan:
                         height,                          # Y (top of bar)
                         f'{int(height)}',                # The Label
                         ha='center', va='bottom',        # Alignment
-                        fontweight='bold'
+                        fontweight='bold', fontsize=9
                     )
                 
                 # Remove ugly borders
