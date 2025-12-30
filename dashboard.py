@@ -147,12 +147,9 @@ if btn_scan:
                 # Data Prep
                 if view_mode == "Top 5 (Clean)":
                     data_slice = author_counts.head(5)
-                    # We reverse it so the #1 author is at the TOP of the chart
-                    data_slice = data_slice.iloc
                     labels = list(data_slice.index)
                     values = list(data_slice.values)
                 else:
-                    # Show All (Reversed)
                     data_slice = author_counts
                     labels = list(data_slice.index)
                     values = list(data_slice.values)
